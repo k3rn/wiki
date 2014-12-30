@@ -76,10 +76,6 @@ def gp():
 
 class Handler(FileSystemEventHandler):
     def on_modified(self, event):
-        self.config = yaml.load(open("_config.yml", "r"))
-        self.config['debug'] = True
-        with open("_config.yml", "w") as config_file:
-            config_file.write(yaml.dump(self.config, default_flow_style=False))
         g()
 
 
@@ -93,9 +89,5 @@ def l():
         while True:
             time.sleep(1)
     except (KeyboardInterrupt, SystemExit):
-        config = yaml.load(open("_config.yml", "r"))
-        config['debug'] = False
-        with open("_config.yml", "w") as config_file:
-            config_file.write(yaml.dump(config, default_flow_style=False))
         observer.stop()
     observer.join()
